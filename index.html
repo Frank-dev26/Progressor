@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Progressor — L'application académique du futur</title>
+
+<meta name="description" content="Progressor est une application académique futuriste permettant de calculer les moyennes, suivre les progrès et atteindre les objectifs scolaires.">
+
+<link rel="icon" href="favicon.ico">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050816;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+.background{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-3;
+
+    background:
+    radial-gradient(circle at top left,#0066ff,#050816),
+    radial-gradient(circle at bottom right,#ff00c8,#050816);
+
+    filter:blur(100px);
+
+    animation:bgMove 10s infinite alternate;
+}
+
+@keyframes bgMove{
+
+    0%{
+        transform:scale(1) rotate(0deg);
+    }
+
+    100%{
+        transform:scale(1.25) rotate(8deg);
+    }
+
+}
+
+/* PARTICLES */
+
+#particles{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-2;
+}
+
+/* NAVBAR */
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+
+    backdrop-filter:blur(20px);
+
+    background:rgba(0,0,0,0.2);
+
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+nav{
+    width:92%;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+
+    box-shadow:
+    0 0 20px #00aaff;
+}
+
+.brand{
+    font-size:28px;
+    font-weight:700;
+
+    background:linear-gradient(45deg,#00aaff,#ff00c8);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.links{
+    display:flex;
+    gap:35px;
+}
+
+.links a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+    transition:0.4s;
+}
+
+.links a:hover{
+    color:#00c3ff;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:120px 20px 50px;
+}
+
+.hero-content{
+    max-width:1100px;
+}
+
+.hero-title{
+    font-size:85px;
+    line-height:1.1;
+    font-weight:800;
+
+    text-shadow:
+    0 0 20px rgba(0,170,255,0.6),
+    0 0 60px rgba(255,0,200,0.4);
+
+    animation:float 4s infinite ease-in-out;
+}
+
+.gradient{
+    background:linear-gradient(45deg,#00aaff,#ff00c8);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+.hero-text{
+    margin-top:30px;
+    font-size:23px;
+    line-height:2;
+    opacity:0.9;
+}
+
+.hero-buttons{
+    margin-top:45px;
+
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:18px 42px;
+
+    border:none;
+
+    border-radius:20px;
+
+    font-size:19px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.5s;
+
+    text-decoration:none;
+
+    display:inline-block;
+}
+
+.primary{
+    background:linear-gradient(45deg,#0066ff,#ff00c8);
+    color:white;
+
+    box-shadow:
+    0 0 25px rgba(0,170,255,0.5);
+}
+
+.secondary{
+    background:rgba(255,255,255,0.08);
+    color:white;
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.btn:hover{
+    transform:translateY(-8px) scale(1.05);
+
+    box-shadow:
+    0 0 30px #00aaff,
+    0 0 80px rgba(255,0,200,0.5);
+}
+
+/* STATS */
+
+.stats{
+    width:92%;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+
+    margin-top:-120px;
+}
+
+.stat-card{
+    padding:40px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    text-align:center;
+
+    transition:0.5s;
+}
+
+.stat-card:hover{
+    transform:translateY(-10px);
+
+    box-shadow:
+    0 0 30px rgba(0,170,255,0.4);
+}
+
+.number{
+    font-size:65px;
+    font-weight:800;
+
+    color:#00c3ff;
+}
+
+.label{
+    margin-top:10px;
+    font-size:18px;
+}
+
+/* SECTION */
+
+section{
+    width:92%;
+    margin:120px auto;
+}
+
+.section-title{
+    font-size:60px;
+    text-align:center;
+    margin-bottom:70px;
+
+    background:linear-gradient(45deg,#00aaff,#ff00c8);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.card{
+    padding:35px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    transition:0.5s;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:'';
+
+    position:absolute;
+    width:180px;
+    height:180px;
+
+    background:rgba(255,255,255,0.08);
+
+    border-radius:50%;
+
+    top:-60px;
+    right:-60px;
+}
+
+.card:hover{
+    transform:translateY(-15px);
+
+    box-shadow:
+    0 0 40px rgba(0,170,255,0.4),
+    0 0 80px rgba(255,0,200,0.2);
+}
+
+.card h3{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.card p{
+    line-height:2;
+    opacity:0.9;
+}
+
+/* SCREENSHOTS */
+
+.gallery{
+    display:flex;
+    gap:30px;
+    overflow:auto;
+    padding-bottom:20px;
+}
+
+.gallery img{
+    width:600px;
+    border-radius:30px;
+
+    transition:0.5s;
+
+    box-shadow:
+    0 0 30px rgba(0,0,0,0.4);
+}
+
+.gallery img:hover{
+    transform:scale(1.04);
+}
+
+/* DOWNLOADS */
+
+.downloads{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.download-box{
+    padding:40px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(18px);
+
+    text-align:center;
+
+    transition:0.5s;
+}
+
+.download-box:hover{
+    transform:translateY(-12px);
+}
+
+.download-box h3{
+    font-size:35px;
+    margin-bottom:25px;
+}
+
+.download-box a{
+    display:block;
+
+    margin-top:18px;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    background:linear-gradient(45deg,#0066ff,#ff00c8);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:0.4s;
+}
+
+.download-box a:hover{
+    transform:scale(1.05);
+}
+
+/* COMMENTS */
+
+.comment-section{
+    text-align:center;
+}
+
+textarea{
+    width:100%;
+    max-width:900px;
+    height:220px;
+
+    border:none;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(15px);
+
+    color:white;
+
+    font-size:18px;
+
+    outline:none;
+}
+
+.send{
+    margin-top:25px;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:50px 20px;
+    opacity:0.7;
+}
+
+/* REVEAL */
+
+.hidden{
+    opacity:0;
+    transform:translateY(80px);
+    transition:1s;
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .hero-title{
+        font-size:50px;
+    }
+
+    .hero-text{
+        font-size:18px;
+    }
+
+    .section-title{
+        font-size:40px;
+    }
+
+    .links{
+        display:none;
+    }
+
+    .gallery img{
+        width:90%;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="background"></div>
+
+<canvas id="particles"></canvas>
+
+<header>
+
+<nav>
+
+<div class="logo-area">
+    <img src="logo.jpg" class="logo">
+    <div class="brand">PROGRESSOR</div>
+</div>
+
+<div class="links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#screens">Screenshots</a>
+    <a href="#downloads">Téléchargements</a>
+    <a href="#comments">Commentaires</a>
+</div>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1 class="hero-title">
+L'application académique du futur
+</h1>
+
+<p class="hero-text">
+Calcul intelligent des moyennes • Graphiques dynamiques • Objectifs académiques • Version PC & Android • Suivi des performances scolaires
+</p>
+
+<div class="hero-buttons">
+
+<a href="#downloads" class="btn primary">Télécharger</a>
+
+<a href="https://progressoronline.kesug.com" class="btn secondary">Version Online</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="stats hidden">
+
+<div class="stat-card">
+    <div class="number" data-target="3">0</div>
+    <div class="label">Versions publiées</div>
+</div>
+
+<div class="stat-card">
+    <div class="number" data-target="100">0</div>
+    <div class="label">Motivation</div>
+</div>
+
+<div class="stat-card">
+    <div class="number" data-target="24">0</div>
+    <div class="label">Heures d'innovation</div>
+</div>
+
+<div class="stat-card">
+    <div class="number" data-target="2026">0</div>
+    <div class="label">Vision futuriste</div>
+</div>
+
+</section>
+
+<section id="features" class="hidden">
+
+<h2 class="section-title">Pourquoi Progressor ?</h2>
+
+<div class="cards">
+
+<div class="card">
+    <h3>Calcul intelligent</h3>
+    <p>
+        Calculez vos moyennes générales instantanément avec un système pensé pour les élèves et étudiants.
+    </p>
+</div>
+
+<div class="card">
+    <h3>Graphiques futuristes</h3>
+    <p>
+        Visualisez votre progression avec des graphes modernes et motivants.
+    </p>
+</div>
+
+<div class="card">
+    <h3>Objectifs scolaires</h3>
+    <p>
+        Découvrez quelles notes vous devez obtenir pour atteindre vos ambitions.
+    </p>
+</div>
+
+<div class="card">
+    <h3>PC + Android</h3>
+    <p>
+        Utilisez Progressor sur ordinateur, téléphone Android et même en ligne.
+    </p>
+</div>
+
+<div class="card">
+    <h3>Rapide & Moderne</h3>
+    <p>
+        Une interface ultra fluide inspirée des applications premium modernes.
+    </p>
+</div>
+
+<div class="card">
+    <h3>Créé par ACADEMICAL TECHS</h3>
+    <p>
+        Une vision technologique tournée vers la réussite scolaire.
+    </p>
+</div>
+
+</div>
+
+</section>
+
+<section id="screens" class="hidden">
+
+<h2 class="section-title">Screenshots</h2>
+
+<div class="gallery">
+
+<img src="Capture d'écran 2026-02-23 185128.png">
+<img src="Capture d'écran 2026-02-23 185013.png">
+<img src="Capture d'écran 2026-02-23 175805.png">
+<img src="Capture d'écran 2026-02-23 175914.png">
+
+</div>
+
+</section>
+
+<section id="downloads" class="hidden">
+
+<h2 class="section-title">Téléchargements</h2>
+
+<div class="downloads">
+
+<div class="download-box">
+
+<h3>Windows</h3>
+
+<p>
+Téléchargez la version EXE pour PC.
+</p>
+
+<a href="https://drive.google.com/file/d/1Ip2jd39Nqct4RuciIU5rfoacqcZTSq7K/view?usp=sharing">
+EXE v1.1.2
+</a>
+
+</div>
+
+<div class="download-box">
+
+<h3>Android</h3>
+
+<p>
+Téléchargez l'application APK.
+</p>
+
+<a href="Progressor v1.1.2.apk">
+APK v1.1.2
+</a>
+
+</div>
+
+<div class="download-box">
+
+<h3>Version Online</h3>
+
+<p>
+Utilisez Progressor directement depuis votre navigateur.
+</p>
+
+<a href="https://progressoronline.kesug.com">
+Lancer Progressor Online
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="comments" class="comment-section hidden">
+
+<h2 class="section-title">Commentaires</h2>
+
+<form action="https://formspree.io/f/xkovyvbz" method="POST">
+
+<textarea name="commentaire" placeholder="Laissez votre avis sur Progressor..."></textarea>
+
+<br>
+
+<button class="btn primary send">Envoyer</button>
+
+</form>
+
+</section>
+
+<footer>
+© 2026 ACADEMICAL TECHS — Progressor
+</footer>
+
+<script>
+
+/* PARTICLES */
+
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<120;i++){
+
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*3,
+        dx:(Math.random()-0.5)*1,
+        dy:(Math.random()-0.5)*1
+    });
+
+}
+
+function animateParticles(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p=>{
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(255,255,255,0.7)';
+        ctx.fill();
+
+        p.x+=p.dx;
+        p.y+=p.dy;
+
+        if(p.x<0 || p.x>canvas.width) p.dx*=-1;
+        if(p.y<0 || p.y>canvas.height) p.dy*=-1;
+
+    });
+
+    requestAnimationFrame(animateParticles);
+
+}
+
+animateParticles();
+
+/* COUNTERS */
+
+const counters = document.querySelectorAll('.number');
+
+counters.forEach(counter=>{
+
+    const update = ()=>{
+
+        const target = +counter.getAttribute('data-target');
+
+        const count = +counter.innerText;
+
+        const speed = target/100;
+
+        if(count < target){
+
+            counter.innerText = Math.ceil(count + speed);
+
+            setTimeout(update,25);
+
+        }
+        else{
+            counter.innerText = target;
+        }
+
+    }
+
+    update();
+
+});
+
+/* REVEAL */
+
+const hiddenElements = document.querySelectorAll('.hidden');
+
+const observer = new IntersectionObserver(entries=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+
+    });
+
+});
+
+hiddenElements.forEach(el=>observer.observe(el));
+
+/* TILT EFFECT */
+
+const cards = document.querySelectorAll('.card,.download-box,.stat-card');
+
+cards.forEach(card=>{
+
+    card.addEventListener('mousemove',e=>{
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateY = ((x / rect.width)-0.5)*18;
+        const rotateX = ((y / rect.height)-0.5)*-18;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+
+    });
+
+    card.addEventListener('mouseleave',()=>{
+
+        card.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+
+    });
+
+});
+
+/* TYPEWRITER */
+
+const title = document.querySelector('.hero-title');
+
+const text = title.innerHTML;
+
+title.innerHTML='';
+
+let index=0;
+
+function type(){
+
+    if(index < text.length){
+
+        title.innerHTML += text.charAt(index);
+
+        index++;
+
+        setTimeout(type,35);
+
+    }
+
+}
+
+setTimeout(type,600);
+
+/* PARALLAX */
+
+window.addEventListener('scroll',()=>{
+
+    const scroll = window.scrollY;
+
+    document.querySelector('.background').style.transform = `translateY(${scroll*0.15}px)`;
+
+});
+
+/* MUSIC-LIKE GLOW */
+
+setInterval(()=>{
+
+    document.querySelector('.brand').style.textShadow = `0 0 ${Math.random()*25}px #00aaff`;
+
+},400);
+
+</script>
+
+</body>
+</html>
